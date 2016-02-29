@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>TicTacToe</title>
+</head>
+<body>
+	<style>
+	#board {
+	border-collapse: collapse;
+	width:450px;
+	height:450px;
+	margin:0 auto;
+	}
+	#board td{
+	border: 4px solid #444;
+	width:150px;
+	height:150px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 150px;
+	line-height: 150px;
+	font-family: Arial;
+	box-sizing:border-box;
+	}
+	</style>
+	<table id="board">
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+<script>
+	(function(){
+		var board = document.getElementById('board'),
+			boardPiece = board.getElementsByTagName('td'),
+		    playerTurn = 'o',
+		    count = 0,
+		    changePlayer = function () {
+		    	if (playerTurn==='o') {
+		    		playerTurn='x'
+		    	} else{
+		    		playerTurn='o'
+		    	};
+		    },
+		    checkScore = function(){
+    			if (
+    				boardPiece[0].innerText != '' && boardPiece[0].innerText === boardPiece[1].innerText && boardPiece[0].innerText === boardPiece[2].innerText
+    				) {
+    				showWinner();
+    			} else if(
+    				boardPiece[3].innerText != '' && boardPiece[3].innerText === boardPiece[4].innerText && boardPiece[3].innerText === boardPiece[5].innerText
+    				) {
+    				showWinner();
+    			} else if(
+    				boardPiece[6].innerText != '' &&  boardPiece[6].innerText === boardPiece[7].innerText && boardPiece[6].innerText === boardPiece[8].innerText
+    				) {
+    				showWinner();
+    			} else if(
+    				boardPiece[0].innerText != '' &&  boardPiece[0].innerText === boardPiece[3].innerText && boardPiece[0].innerText === boardPiece[6].innerText
+    				) {
+    				showWinner();
+    			} else if(
+    				boardPiece[1].innerText != '' &&  boardPiece[1].innerText === boardPiece[4].innerText && boardPiece[1].innerText === boardPiece[7].innerText
+    				) {
+    				showWinner();
+    			} else if(
+    				boardPiece[2].innerText != '' &&  boardPiece[2].innerText === boardPiece[5].innerText && boardPiece[2].innerText === boardPiece[8].innerText
+    				) {
+    				showWinner();
+    			}else if(
+    				boardPiece[0].innerText != '' &&  boardPiece[0].innerText === boardPiece[4].innerText && boardPiece[0].innerText === boardPiece[8].innerText
+    				) {
+    				showWinner();
+    			} else if(
+    				boardPiece[2].innerText != '' &&  boardPiece[2].innerText === boardPiece[4].innerText && boardPiece[2].innerText === boardPiece[6].innerText
+    				) {
+    				showWinner();
+    			} else{
+    				console.log('no win!');
+    				return;
+	    		};
+		    },
+		    showWinner = function(){
+		    	alert('Player ' + playerTurn + ' wins!!!');
+		    	count = 0;
+		    	location.reload();
+		    }
+	    
+			for (var i = 0; i < boardPiece.length; i++) { 
+				boardPiece[i].onclick = function(){
+					if (this.innerText==='') {
+						this.innerText=playerTurn;
+						checkScore();
+						changePlayer();
+						if(count===8){
+							alert('The game is a tie!');
+						}
+						count++;
+					}
+					else{
+						alert('Can\'t play here!');
+					}
+				};
+			}
+	})();
+</script>
+</html>
